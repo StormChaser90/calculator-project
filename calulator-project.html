@@ -7,8 +7,8 @@
   </head>
   <body>
     <h1>Calculator</h1>
-    <div id="container">
-      <input id="input" type= "text" value = "" />
+    <form id="container">
+      <input id="input" type= "text" />
       <br>
       <input type="button" id="one" value = "1" onclick = "insert(this)"></input>
       <input type="button" id="two" value = "2" onclick = "insert(this)"></input>
@@ -30,9 +30,8 @@
       <br>
       <input type="button" id="divide" value = "/" onclick = "operate(this)"></input>
       <input type="button" id="equals" value = "=" onclick = "operate(this)"></input>
-      <input type="button" id="clear" value = "Clear"></input>
-      
-    </div>
+      <input type="reset" id="clear" value = "clear"></input>
+    </form>
   </body>
   <script type="text/javascript" src="script.js"></script>
 </html>
