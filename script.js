@@ -23,7 +23,8 @@ butts.addEventListener("click", (event) => {
     return;
   }
   if (target.classList.contains("decimal")) {
-    console.log("decimal", target.value);
+    selectDec(target.value);
+    update();
     return;
   }
   if (target.classList.contains("allClear")) {
@@ -37,6 +38,12 @@ butts.addEventListener("click", (event) => {
 function selectDigit(digit) {
   const { displayVal } = storeVal;
   storeVal.displayVal = displayVal === "0" ? digit : displayVal + digit;
+}
+
+function selectDec(decimal) {
+  if (!storeVal.displayVal.includes(decimal)) {
+    storeVal.displayVal += decimal;
+  }
 }
 
 function selectOp(operator) {
