@@ -19,7 +19,8 @@ butts.addEventListener("click", (event) => {
     return;
   }
   if (target.classList.contains("operator")) {
-    console.log("operator", target.value);
+    selectOp(target.value);
+    update();
     return;
   }
   if (target.classList.contains("decimal")) {
@@ -36,8 +37,15 @@ butts.addEventListener("click", (event) => {
 });
 
 function selectDigit(digit) {
-  const { displayVal } = storeVal;
-  storeVal.displayVal = displayVal === "0" ? digit : displayVal + digit;
+  const { displayVal, waitingForSecondOperand } = storeVal;
+
+  if (waitingForSecondOperand === true) {
+    storeVal.displayVal = digit;
+    storeVal.waitingForSecondOperand = false;
+  } else {
+    storeVal.displayVal = displayVal === "0" ? digit : displayVal + digit;
+  }
+  console.log(storeVal);
 }
 
 function selectDec(decimal) {
@@ -46,9 +54,15 @@ function selectDec(decimal) {
   }
 }
 
-function selectOp(operator) {
-  const { displayVal } = storeVal;
-  storeVal.displayVal = displayVal === "0" ? operator : displayVal + operator;
+function selectOp(nextOperator) {
+  const { firstOperand, displayVal, operator } = storeVal;
+  const inputVal = parseFloat(displayVal);
+  if (firstOperand === null && !isNaN(inputVal)) {
+    storeVal.firstOperand = inputVal;
+  }
+  storeVal.waitingForSecondOperand = true;
+  storeVal.operator = nextOperator;
+  console.log(storeVal);
 }
 // function add(a, b) {
 //   return +(parseInt(a) + parseInt(b));
