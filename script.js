@@ -27,6 +27,11 @@ function selectOp(nextOperator) {
   const { firstOperand, displayVal, operator } = storeVal;
   const inputVal = parseFloat(displayVal);
 
+  if (operator && storeVal.waitingForSecondOperand) {
+    storeVal.operator = nextOperator;
+    console.log(nextOperator);
+    return;
+  }
   if (firstOperand == null && !isNaN(inputVal)) {
     storeVal.firstOperand = inputVal;
   } else if (operator) {
@@ -53,11 +58,18 @@ function calc(firstOperand, secondOperand, operator) {
   return secondOperand;
 }
 
+function clear() {
+  storeVal.displayVal = "0";
+  storeVal.firstOperand = null;
+  storeVal.waitingForSecondOperand = false;
+  storeVal.operator = null;
+  console.log(storeVal);
+}
+
 function update() {
   const display = document.querySelector(".calcDisplay");
   display.value = storeVal.displayVal;
 }
-
 update();
 
 const butts = document.querySelector(".calcButts");
@@ -77,7 +89,8 @@ butts.addEventListener("click", (event) => {
     return;
   }
   if (target.classList.contains("allClear")) {
-    console.log("clear", target.value);
+    clear();
+    update();
     return;
   }
   selectDigit(target.value);
