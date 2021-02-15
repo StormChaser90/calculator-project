@@ -14,10 +14,15 @@ function selectDigit(digit) {
   } else {
     storeVal.displayVal = displayVal === "0" ? digit : displayVal + digit;
   }
-  console.log(storeVal);
+  // console.log(storeVal);
 }
 
 function selectDec(decimal) {
+  if (storeVal.waitingForSecondOperand === true) {
+    storeVal.displayVal = "0.";
+    storeVal.waitingForSecondOperand = false;
+    return;
+  }
   if (!storeVal.displayVal.includes(decimal)) {
     storeVal.displayVal += decimal;
   }
@@ -29,7 +34,7 @@ function selectOp(nextOperator) {
 
   if (operator && storeVal.waitingForSecondOperand) {
     storeVal.operator = nextOperator;
-    console.log(nextOperator);
+    // console.log(nextOperator);
     return;
   }
   if (firstOperand == null && !isNaN(inputVal)) {
@@ -37,12 +42,12 @@ function selectOp(nextOperator) {
   } else if (operator) {
     const result = calc(firstOperand, inputVal, operator);
 
-    storeVal.displayVal = String(result);
+    storeVal.displayVal = `${parseFloat(result.toFixed(5))}`;
     storeVal.firstOperand = result;
   }
   storeVal.waitingForSecondOperand = true;
   storeVal.operator = nextOperator;
-  console.log(storeVal);
+  // console.log(storeVal);
 }
 
 function calc(firstOperand, secondOperand, operator) {
@@ -63,7 +68,7 @@ function clear() {
   storeVal.firstOperand = null;
   storeVal.waitingForSecondOperand = false;
   storeVal.operator = null;
-  console.log(storeVal);
+  // console.log(storeVal);
 }
 
 function update() {
@@ -75,24 +80,28 @@ update();
 const butts = document.querySelector(".calcButts");
 butts.addEventListener("click", (event) => {
   const { target } = event;
+  const { value } = target;
   if (!target.matches("button")) {
     return;
   }
-  if (target.classList.contains("operator")) {
-    selectOp(target.value);
-    update();
-    return;
+  switch (value) {
+    case "+":
+    case "-":
+    case "=":
+    case "/":
+    case "*":
+      selectOp(value);
+      break;
+    case ".":
+      selectDec(value);
+      break;
+    case "allClear":
+      clear();
+      break;
+    default:
+      if (Number.isInteger(parseFloat(value))) {
+        selectDigit(value);
+      }
   }
-  if (target.classList.contains("decimal")) {
-    selectDec(target.value);
-    update();
-    return;
-  }
-  if (target.classList.contains("allClear")) {
-    clear();
-    update();
-    return;
-  }
-  selectDigit(target.value);
   update();
 });
