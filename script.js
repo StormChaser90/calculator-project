@@ -1,5 +1,5 @@
 const storeVal = {
-  displayValue: "0",
+  displayVal: "0",
   firstOperand: null,
   waitingForSecondOperand: false,
   operator: null,
@@ -7,7 +7,7 @@ const storeVal = {
 
 function update() {
   const display = document.querySelector(".calcDisplay");
-  display.value = storeVal.displayValue;
+  display.value = storeVal.displayVal;
 }
 
 update();
@@ -30,8 +30,19 @@ butts.addEventListener("click", (event) => {
     console.log("clear", target.value);
     return;
   }
-  console.log("digit", target.value);
+  selectDigit(target.value);
+  update();
 });
+
+function selectDigit(digit) {
+  const { displayVal } = storeVal;
+  storeVal.displayVal = displayVal === "0" ? digit : displayVal + digit;
+}
+
+function selectOp(operator) {
+  const { displayVal } = storeVal;
+  storeVal.displayVal = displayVal === "0" ? operator : displayVal + operator;
+}
 // function add(a, b) {
 //   return +(parseInt(a) + parseInt(b));
 // }
