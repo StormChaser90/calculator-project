@@ -1,3 +1,4 @@
+// const variable to store initial values //
 const storeVal = {
   displayVal: "0",
   firstOperand: null,
@@ -5,6 +6,7 @@ const storeVal = {
   operator: null,
 };
 
+// func when user selects a digit //
 function selectDigit(digit) {
   const { displayVal, waitingForSecondOperand } = storeVal;
 
@@ -37,7 +39,7 @@ function selectOp(nextOperator) {
     // console.log(nextOperator);
     return;
   }
-  if (firstOperand == null && !isNaN(inputVal)) {
+  if (firstOperand === null && !isNaN(inputVal)) {
     storeVal.firstOperand = inputVal;
   } else if (operator) {
     const result = calc(firstOperand, inputVal, operator);
@@ -71,19 +73,27 @@ function clear() {
   // console.log(storeVal);
 }
 
+// func to update screen //
 function update() {
+  // call element class to be updated
   const display = document.querySelector(".calcDisplay");
+  // update value of element with property displayVal
   display.value = storeVal.displayVal;
 }
 update();
 
+// handle all types of button clicks (digits, decimal, operators, clear) //
+// select element to listen to
 const butts = document.querySelector(".calcButts");
+// listen for button clicks
 butts.addEventListener("click", (event) => {
-  const { target } = event;
-  const { value } = target;
-  if (!target.matches("button")) {
-    return;
-  }
+  // const { target } = event;
+  const target = event.target;
+  // const { value } = target;
+  const value = target.value;
+  // console.log(event);
+  // console.log(target);
+  // console.log(value);
   switch (value) {
     case "+":
     case "-":

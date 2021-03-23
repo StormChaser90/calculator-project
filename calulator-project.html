@@ -1,38 +1,38 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <!-- <link rel="stylesheet" type="text/css" href="styles.css" /> -->
-    <title>Page Title</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <title>Calculator</title>
     <meta charset="UTF-8" />
   </head>
   <body>
-    <h1>Calculator</h1>
+    <h1></h1>
     <div class="calc">
       <input type="text" class="calcDisplay" value="0" placeholder="0" />
 
       <div class="calcButts">
         <button type="button" class="operator" value="+">+</button>
         <button type="button" class="operator" value="-">-</button>
-        <button type="button" class="operator" value="*">&times;</button>
         <button type="button" class="operator" value="/">&divide;</button>
+        <button type="button" class="operator" value="*">&times;</button>
 
-        <button type="button" value="7">7</button>
-        <button type="button" value="8">8</button>
-        <button type="button" value="9">9</button>
+        <button type="button" class="number" value="7">7</button>
+        <button type="button" class="number" value="8">8</button>
+        <button type="button" class="number" value="9">9</button>
 
-        <button type="button" value="4">4</button>
-        <button type="button" value="5">5</button>
-        <button type="button" value="6">6</button>
+        <button type="button" class="number" value="4">4</button>
+        <button type="button" class="number" value="5">5</button>
+        <button type="button" class="number" value="6">6</button>
 
-        <button type="button" value="1">1</button>
-        <button type="button" value="2">2</button>
-        <button type="button" value="3">3</button>
-
-        <button type="button" value="0">0</button>
-        <button type="button" class="decimal function" value=".">.</button>
-        <button type="button" class="allClear function" value="allClear">
+        <button type="button" class="number" value="1">1</button>
+        <button type="button" class="number" value="2">2</button>
+        <button type="button" class="number" value="3">3</button>
+        <button type="button" class="allClearFunction" value="allClear">
           AC
         </button>
+        <button type="button" id="zero" value="0">0</button>
+
+        <button type="button" class="decimalFunction" value=".">.</button>
 
         <button type="button" class="equal-sign operator" value="=">=</button>
       </div>
